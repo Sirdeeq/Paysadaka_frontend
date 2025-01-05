@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
+import { CharityData, MasjidData } from './organizations';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -15,6 +16,16 @@ export const fetchCharities = async (): Promise<Organization[]> => {
 
 export const submitDonation = async (donationData: DonationFormData) => {
   const response = await axios.post(`${API_BASE_URL}/donations/donate`, donationData);
+  return response.data;
+};
+
+export const createMasjid = async (masjidData: MasjidData) => {
+  const response = await axios.post(`${API_BASE_URL}/masjids/register`, masjidData);
+  return response.data;
+};
+
+export const createCharity = async (charityData: CharityData) => {
+  const response = await axios.post(`${API_BASE_URL}/charities/create`, charityData);
   return response.data;
 };
 
