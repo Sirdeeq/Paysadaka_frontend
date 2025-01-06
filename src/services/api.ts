@@ -2,8 +2,10 @@ import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
 import { CharityData, MasjidData } from './organizations';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+// const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
 
+// https://paysadaka-backend.onrender.com
 export const fetchMasjids = async (): Promise<Organization[]> => {
   const response = await axios.get(`${API_BASE_URL}/masjids/all_masjids`);
   return response.data;
