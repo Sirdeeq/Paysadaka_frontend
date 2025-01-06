@@ -3,43 +3,50 @@ import type { Organization, DonationFormData } from '../types/donation';
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
+/** Fetch all Masjids */
 export const fetchMasjids = async (): Promise<Organization[]> => {
   const response = await axios.get(`${API_BASE_URL}/masjids/all_masjids`);
   return response.data;
 };
 
+/** Fetch all Charities */
 export const fetchCharities = async (): Promise<Organization[]> => {
   const response = await axios.get(`${API_BASE_URL}/charities/all_organisation`);
   return response.data;
 };
 
-export const submitDonation = async (donationData: DonationFormData) => {
+/** Submit Donation */
+export const submitDonation = async (donationData: DonationFormData): Promise<unknown> => {
   const response = await axios.post(`${API_BASE_URL}/donations/donate`, donationData);
   return response.data;
 };
 
-export const verifyMasjid = async (token: string) => {
+/** Verify Masjid */
+export const verifyMasjid = async (token: string): Promise<unknown> => {
   const response = await axios.get(`${API_BASE_URL}/masjids/verify/${token}`);
   return response.data;
 };
-export const verifyCharity = async (token: string) => {
+
+/** Verify Charity */
+export const verifyCharity = async (token: string): Promise<unknown> => {
   const response = await axios.get(`${API_BASE_URL}/charities/verify/${token}`);
   return response.data;
 };
 
-
-export const fetchMasjidById = async (id: string) => {
-    const response = await axios.get(`${API_BASE_URL}/masjids/get_one_masjid/${id}`);
-    return response.data;
+/** Fetch Masjid by ID */
+export const fetchMasjidById = async (id: string): Promise<Organization> => {
+  const response = await axios.get(`${API_BASE_URL}/masjids/get_one_masjid/${id}`);
+  return response.data;
 };
 
-export const fetchCharityById = async (id: string) => {
-    const response = await axios.get(`${API_BASE_URL}/charities/get_one_charity/${id}`);
-    return response.data;
-};  
+/** Fetch Charity by ID */
+export const fetchCharityById = async (id: string): Promise<Organization> => {
+  const response = await axios.get(`${API_BASE_URL}/charities/get_one_charity/${id}`);
+  return response.data;
+};
 
-
-export const uploadFile = async (file: FormData) => {
+/** Upload File */
+export const uploadFile = async (file: FormData): Promise<unknown> => {
   const response = await axios.post(`${API_BASE_URL}/upload/single`, file, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -48,47 +55,35 @@ export const uploadFile = async (file: FormData) => {
   return response.data;
 };
 
-
-
-// export const fetchBankDetails = async (): Promise<any[]> => {
-//   const response = await axios.get(`${API_BASE_URL}/banks/all_banks`);
-//   return response.data;
-// };
-
-// export const fetchBankById = async (bankId: string): Promise<any> => {
-//   const response = await axios.get(`${API_BASE_URL}/banks/get_one_bank/${bankId}`);
-//   return response.data;
-// };
-
-// export const fetchBankDetails = async (): Promise<any[]> => {
-//   const response = await axios.get(`${API_BASE_URL}/banks/all_banks`);
-//   return response.data;
-// };
-
-export const verifyBank = async (bankDetails: { accountNumber: string; bankName: string; accountName: string }): Promise<any> => {
+/** Verify Bank Details */
+export const verifyBank = async (bankDetails: { accountNumber: string; bankName: string; accountName: string }): Promise<unknown> => {
   const response = await axios.post(`${API_BASE_URL}/banks/verify`, bankDetails);
   return response.data;
 };
 
+/** Fetch All Donations */
 export const fetchDonations = async (): Promise<DonationFormData[]> => {
   const response = await axios.get(`${API_BASE_URL}/donations/all-donations`);
   return response.data;
 };
 
-export const fetchDonationById = async (id: string) => {
+/** Fetch Donation by ID */
+export const fetchDonationById = async (id: string): Promise<DonationFormData> => {
   const response = await axios.get(`${API_BASE_URL}/donations/one-donation/${id}`);
   return response.data;
 };
 
-export const verifyDonation = async (reference: string) => {
+/** Verify Donation */
+export const verifyDonation = async (reference: string): Promise<unknown> => {
   const response = await axios.get(`${API_BASE_URL}/donations/verify/${reference}`);
   return response.data;
 };
 
-export const approveDonation = async (id: string, password: string, token: string) => {
+/** Approve Donation */
+export const approveDonation = async (id: string, password: string, token: string): Promise<unknown> => {
   const response = await axios.put(
     `${API_BASE_URL}/admin/approve-donation/${id}`,
-    { password: password },
+    { password },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -98,7 +93,8 @@ export const approveDonation = async (id: string, password: string, token: strin
   return response.data;
 };
 
-export const adminBalance = async (token: string) => {
+/** Fetch Admin Balance */
+export const adminBalance = async (token: string): Promise<unknown> => {
   const response = await axios.get(`${API_BASE_URL}/admin/balance`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -107,7 +103,8 @@ export const adminBalance = async (token: string) => {
   return response.data;
 };
 
-export const adminDonations = async (token: string) => {
+/** Fetch Admin Donations */
+export const adminDonations = async (token: string): Promise<unknown> => {
   const response = await axios.get(`${API_BASE_URL}/admin/balance`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -116,22 +113,14 @@ export const adminDonations = async (token: string) => {
   return response.data;
 };
 
-export const adminLogin = async (email: string, password: string) => {
-  const response = await axios.post(`${API_BASE_URL}/admin/login`, { email: email, password: password });
+/** Admin Login */
+export const adminLogin = async (email: string, password: string): Promise<unknown> => {
+  const response = await axios.post(`${API_BASE_URL}/admin/login`, { email, password });
   return response.data;
 };
 
-export const adminSignup = async (name: string, email: string, password: string) => {
-  const response = await axios.post(`${API_BASE_URL}/admin/create`, { name: name, email: email, password: password });
+/** Admin Signup */
+export const adminSignup = async (name: string, email: string, password: string): Promise<unknown> => {
+  const response = await axios.post(`${API_BASE_URL}/admin/create`, { name, email, password });
   return response.data;
 };
-
-// export const verifyDonation = async (reference: string) => {
-//   try {
-//     const response = await axios.post(`${API_BASE_URL}/donations/verify/${reference}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error verifying donation:', error.response?.data || error.message);
-//     throw error;
-//   }
-// };

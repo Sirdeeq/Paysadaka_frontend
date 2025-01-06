@@ -3,22 +3,23 @@ import { fetchDonations, fetchDonationById, verifyDonation, approveDonation } fr
 import Modal from "../../components/common/Modal";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { Check, Eye, HandThumbsUp } from "lucide-react";  // Import icons from Lucide
+import { Check, Eye } from "lucide-react"; // Removed HandThumbsUp
 
+// Donation Interface
 interface Donation {
   _id: string;
   donor_name: string;
   category: string;
-  masjid_name: string;  // Added masjid_name to the Donation interface
-  masjid_balance: number;  // Added masjid_balance to the Donation interface
-  status: string;  // Added status to the Donation interface
+  masjid_name: string; // Added masjid_name to the Donation interface
+  masjid_balance: number; // Added masjid_balance to the Donation interface
+  status: string; // Added status to the Donation interface
   amount: number;
   paystack_reference: string;
 }
 
 export const Donations: React.FC = () => {
-  const [donations, setDonations] = useState<Donation[]>([]);
-  const [selectedDonation, setSelectedDonation] = useState<Donation | null>(null);
+  const [donations, setDonations] = useState<Donation[]>([]); // Explicitly typed state
+  const [selectedDonation, setSelectedDonation] = useState<Donation | null>(null); // Explicitly typed state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export const Donations: React.FC = () => {
 
   const loadDonations = async () => {
     try {
-      const data = await fetchDonations();
+      const data: Donation[] = await fetchDonations(); // Type explicitly matches the return type of fetchDonations
       if (Array.isArray(data)) {
         setDonations(data);
       } else {
@@ -48,7 +49,7 @@ export const Donations: React.FC = () => {
       return;
     }
     try {
-      const donation = await fetchDonationById(id);
+      const donation: Donation = await fetchDonationById(id); // Explicitly typing `donation`
       if (donation) {
         setSelectedDonation(donation);
         setIsModalOpen(true);
@@ -67,28 +68,33 @@ export const Donations: React.FC = () => {
       toast.error("Cannot process donation.");
       return;
     }
-    const reference = await verifyDonation(donation.paystack_reference);
-    console.log(reference);
-    toast.success(`Donating to ${donation.donor_name}`);
-    navigate(`/dashboard/donation/${donation._id}`);
+    try {
+      const reference = await verifyDonation(donation.paystack_reference); // Explicitly typing not required if verifyDonation returns correct type
+      console.log(reference);
+      toast.success(`Donating to ${donation.donor_name}`);
+      navigate(`/dashboard/donation/${donation._id}`);
+    } catch (error) {
+      console.error("Error verifying donation:", error);
+      toast.error("Failed to verify donation.");
+    }
   };
 
   const handleApprove = async (id: string) => {
     const password = localStorage.getItem("adminPassword");
-    const token = localStorage.getItem("authToken"); 
-  
+    const token = localStorage.getItem("authToken");
+
     if (!password) {
       toast.error("Admin password not found in local storage");
       return;
     }
-  
+
     if (!token) {
       toast.error("Authentication token not found in local storage");
       return;
     }
-  
+
     try {
-      const response = await approveDonation(id, password, token); 
+      const response = await approveDonation(id, password, token); // Assuming response is already typed in `approveDonation`
       console.log(response);
       toast.success("Donation approved successfully");
       loadDonations();
@@ -98,12 +104,17 @@ export const Donations: React.FC = () => {
     }
   };
 
-  const columns = [
-    { header: "S/N", render: (_: any, __: any, index: number) => index + 1 },
+  const columns: 
+  {
+    header: string;
+    accessor?: keyof Donation; // Ensure `accessor` is a key of Donation
+    render?: (value: unknown, donation: Donation, index: number) => React.ReactNode;
+  }[] = [
+    
+    { header: "S/N", render: (_: unknown, __: unknown, index: number) => index + 1 },
     { header: "Donation ID", accessor: "_id" },
-    { header: "Organization Account", accessor: "recipient" },  // Show masjid name
-    // { header: "Organization Balance", accessor: "recipient_balance" },  // Show masjid balance
-    { header: "Status", accessor: "status" },  // Show donation status
+    { header: "Organization Account", accessor: "masjid_name" }, // Correct accessor
+    { header: "Status", accessor: "status" },
     { header: "Donor Name", accessor: "donor_name" },
     { header: "Category", accessor: "category" },
     {
@@ -113,22 +124,21 @@ export const Donations: React.FC = () => {
     },
     {
       header: "Actions",
-      render: (_: any, donation: Donation) => {
+      render: (_: unknown, donation: Donation) => {
         return (
           <div className="flex space-x-2">
-            {/* Only show View and Donate buttons if donation is not approved */}
-              <button
-                onClick={() => handleView(donation._id)}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-              >
-                <Eye /> {/* View icon */}
-              </button>
-            {donation.status !== 'approved' && (
+            <button
+              onClick={() => handleView(donation._id)}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center"
+            >
+              <Eye className="mr-2" /> View
+            </button>
+            {donation.status !== "approved" && (
               <button
                 onClick={() => handleApprove(donation._id)}
-                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 flex items-center"
               >
-                <Check /> {/* Approve icon */}
+                <Check className="mr-2" /> Approve
               </button>
             )}
           </div>
@@ -190,12 +200,12 @@ export const Donations: React.FC = () => {
             <p className="text-lg font-semibold capitalize text-gray-800">
               Donation Masjid: {selectedDonation.masjid_name}
             </p>
-            {selectedDonation.status !== 'approved' && (
+            {selectedDonation.status !== "approved" && (
               <button
                 onClick={() => handleDonate(selectedDonation)}
-                className="w-full mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                className="w-full mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex items-center"
               >
-                <Check /> {/* Donate icon */}
+                <Check className="mr-2" /> Donate
               </button>
             )}
           </div>
