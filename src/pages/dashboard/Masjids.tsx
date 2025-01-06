@@ -36,6 +36,11 @@ export const Masjids: React.FC = () => {
     { header: 'Address', accessor: 'address' as keyof Organization },
     { header: 'Phone', accessor: 'phone_number' as keyof Organization },
     {
+      header: 'Balance',
+      accessor: 'masjid_balance' as keyof Organization,
+      render: (value: number) => `₦${value.toFixed(2)}`,
+    },
+    {
       header: 'Status',
       accessor: 'is_verified' as keyof Organization,
       render: (value: boolean) => (
@@ -66,6 +71,7 @@ export const Masjids: React.FC = () => {
             <div className="space-y-2">
               <p><strong>Address:</strong> {selectedMasjid.address}</p>
               <p><strong>Phone:</strong> {selectedMasjid.phone_number}</p>
+              <p><strong>Balance:</strong> ₦{selectedMasjid.masjid_balance.toFixed(2)}</p>
               <p><strong>Status:</strong> {selectedMasjid.is_verified ? 'Verified' : 'Unverified'}</p>
               {!selectedMasjid.is_verified && (
                 <button
