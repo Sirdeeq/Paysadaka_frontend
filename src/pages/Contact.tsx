@@ -8,7 +8,7 @@ export const Contact: React.FC = () => {
     { name: 'message', label: 'Message', type: 'textarea', required: true },
   ];
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: unknown) => {
     // Handle form submission
     console.log(data);
   };
