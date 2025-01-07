@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { createBrowserRouter } from 'react-router-dom';
 import { LandingLayout } from '../layouts/LandingLayout';
 import { DashboardLayout } from '../layouts/DashboardLayout';
@@ -15,6 +15,7 @@ import { Donations } from '../pages/dashboard/Donations';
 import ProtectedRoute from '../components/common/ProtectedRoute';
 import Login from '../pages/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
+import { Footer } from '../pages/Footer';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
       { path: 'verify-masjid/:id/:token', element: <VerificationCard type="masjid" /> },
       { path: 'verify-charity/:id/:token', element: <VerificationCard type="charity" /> },
       { path: 'login', element: <Login /> },
+      { path: 'footer', element: <Footer />},
     ],
   },
   {

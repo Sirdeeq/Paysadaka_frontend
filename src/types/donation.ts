@@ -5,6 +5,7 @@ export interface DonationFormData {
   category: string;
   recipient_account_number: string;
   organization_name?: string;
+  bank_code?: string;
 }
 
 export interface DonationSubmissionData extends DonationFormData {
@@ -25,6 +26,7 @@ export interface Organization {
     account_number: string;
     account_name: string;
     bank_name: string;
+    bank_code: string;
   };
 }
 

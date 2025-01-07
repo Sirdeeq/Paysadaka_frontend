@@ -1,6 +1,8 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 import { LiveSupport } from '../components/common/LiveSupport';
+import StickyButton from '../pages/StickyButton';
+import { Footer } from '../pages/Footer';
 
 const menuItems = [
   { label: 'Home', path: '/' },
@@ -93,6 +95,9 @@ export const LandingLayout: React.FC = () => {
 
       {/* Live Support Section */}
       <LiveSupport />
+      <Footer />
+      <StickyButton />  
+
     </div>
   );
 };

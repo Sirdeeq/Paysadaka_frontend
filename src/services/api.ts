@@ -1,9 +1,9 @@
 import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
-import { CharityData, MasjidData } from './organizations';
+import { CharityData } from './organizations';
 
-// const API_BASE_URL = 'http://localhost:5000/api';
-const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
+const API_BASE_URL = 'http://localhost:5000/api';
+// const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
 
 // https://paysadaka-backend.onrender.com
 export const fetchMasjids = async (): Promise<Organization[]> => {
@@ -90,6 +90,23 @@ export const approveDonation = async (id: string, password: string, token: strin
   const response = await axios.put(
     `${API_BASE_URL}/admin/approve-donation/${id}`,
     { password },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const disburseDonation = async (id: string, password: string, token: string, account_number: string, bank_code: string): Promise<unknown> => {
+  const response = await axios.put(
+    `${API_BASE_URL}/admin/disburse-donation/${id}`, 
+    { 
+      password, 
+      account_number, 
+      bank_code 
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,

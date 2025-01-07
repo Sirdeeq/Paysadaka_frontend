@@ -2,16 +2,13 @@
 import { RouterProvider } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { router } from './routes';
-import StickyButton from './pages/StickyButton'; // Import the StickyButton component
-import { Footer } from './pages/Footer'; // Update the import path
 function App() {
   return (
     <>
+      <Toaster position="top-right" />
       <RouterProvider router={router} />
 
-      <Footer />
-      <Toaster position="top-right" />
-      <StickyButton />
+     
       
     </>
   );
