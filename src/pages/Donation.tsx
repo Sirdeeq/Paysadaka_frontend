@@ -73,7 +73,8 @@ export const Donation: React.FC = () => {
             net_amount: formData.amount,
             paystack_reference: response.reference,
             recipient_account_number: selectedOrg.bank_details.account_number,
-            bank_code: selectedOrg.bank_details.bank_code
+            bank_code: selectedOrg.bank_details.bank_code,
+            account_name: selectedOrg.bank_details.account_name
           };
 
           console.log("Final donation data:", donationData);

@@ -6,6 +6,7 @@ export interface DonationFormData {
   recipient_account_number: string;
   organization_name?: string;
   bank_code?: string;
+  account_name?: string;
 }
 
 export interface DonationSubmissionData extends DonationFormData {
