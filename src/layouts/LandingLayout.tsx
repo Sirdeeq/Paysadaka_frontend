@@ -89,7 +89,7 @@ export const LandingLayout: React.FC = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1">
+      <main className="flex-1 mb-6 mt-6 px-6">
         <Outlet />
       </main>
 

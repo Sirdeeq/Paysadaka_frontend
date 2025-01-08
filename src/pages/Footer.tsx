@@ -1,43 +1,74 @@
+import { faEnvelope, faMapMarkerAlt, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-100 border-t border-gray-300 py-6">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          {/* Contact Info */}
-          <div className="text-gray-600 text-sm text-center md:text-left">
-            <p>
-              Contact us at:{' '}
+    <footer className="bg-emerald-600 text-tertiary py-8">
+      <div className="container mx-auto px-6">
+        {/* nurseryer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* About */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">About paysadaqa</h3>
+            <p className="text-emerald-50">
+              paysadaqa Donation Platform simplifies secure donations for Masjids
+              worldwide, bridging the gap between donors and Masjids.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="text-emerald-50 text-y space-y-2">
+              <li>
+                 <Link to="/Services"className="hover:underline">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link to="/Features" className="hover:underline">
+                  Features
+                </Link>
+              </li>
+              <li>
+                <a href="/Contact" className="hover:underline">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">Contact Us</h3>
+            <p className="text-emerald-50">
+              <FontAwesomeIcon icon={faEnvelope} className="mr-2 hover:text-yellow-200" />
+              Email:{" "}
               <a
-                href="mailto:support@example.com"
-                className="text-emerald-600 hover:underline"
+                href="mailto:info@paysadaqa.com"
+                className="text-emerald-50 hover:underline"
               >
-                support@example.com
+                info@paysadaqa.com
               </a>
             </p>
-          </div>
-
-          {/* Links */}
-          <div className="flex space-x-4 text-sm">
-            <Link to="/privacy-policy" className="hover:underline text-gray-600">
-              Privacy Policy
-            </Link>
-            <Link to="/terms-of-service" className="hover:underline text-gray-600">
-              Terms of Service
-            </Link>
-            <Link to="/about" className="hover:underline text-gray-600">
-              About Us
-            </Link>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-gray-600 text-sm text-center md:text-right">
-            <p>
-              &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
+            <p className="text-emerald-50">
+              <FontAwesomeIcon icon={faPhone} className="mr-2 hover:text-yellow-200" />
+              Phone: +234 806 601 1841
+            </p>
+            <p className="text-emerald-50">
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2 hover:text-yellow-200" />
+              Address: 123 Masjid Lane, Nigeria
             </p>
           </div>
+        </div>
+
+        {/* Divider */}
+        <div className="mt-8 border-t border-emerald-50 pt-4 text-center">
+          <p className="text-emerald-50 text-sm">
+            &copy; 2024 paysadaqa Donation Platform. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

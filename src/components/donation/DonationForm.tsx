@@ -35,6 +35,8 @@ interface DonationFormData {
   category: string;
   recipient_account_number: string;
   organization_name?: string;
+  bank_code?: string;
+  account_name?: string;
 }
 
 interface DonationFormProps {
@@ -107,6 +109,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
       required: true,
       disabled: true
     }
+
   ];
 
   const handleSubmit = (formData: Record<string, string | number>) => {
@@ -116,6 +119,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
       amount: selectedAmount || Number(customAmount),
       category: String(formData.category),
       recipient_account_number: organization.bank_details.account_number,
+      account_name: organization.bank_details.account_name,
       organization_name: isDonatingAsOrg ? String(formData.organization_name) : undefined
     };
     

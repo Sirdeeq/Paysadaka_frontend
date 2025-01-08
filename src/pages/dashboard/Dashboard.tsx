@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Building2, DollarSign, Heart, Eye, EyeOff } from 'lucide-react';
+import { Building2, Heart, Eye, EyeOff } from 'lucide-react';
 import { MasjidForm } from '../../components/dashboard/MasjidForm';
 import { CharityForm } from '../../components/dashboard/CharityForm';
 import { adminBalance } from '../../services/api';
@@ -88,18 +88,19 @@ const Dashboard: React.FC = () => {
         {/* Total Donation Card */}
         <Card
           label="Total Donations"
-          icon={<DollarSign />}
+          // icon={<DollarSign />}
+          icon={balanceVisible ? <EyeOff /> : <Eye />}
           onClick={() => navigate('/dashboard/donations')}
           className="w-40 h-40 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white"
         />
 
         {/* Approved Donations Card */}
-        <Card
+        {/* <Card
           label="Approved Donations"
           icon={<DollarSign />}
           onClick={() => navigate('/dashboard/approved-donations')}
           className="w-40 h-40 bg-gradient-to-r from-red-500 to-red-600 text-white"
-        />
+        /> */}
       </div>
     </div>
   );

@@ -99,13 +99,14 @@ export const approveDonation = async (id: string, password: string, token: strin
   return response.data;
 };
 
-export const disburseDonation = async (id: string, password: string, token: string, account_number: string, bank_code: string): Promise<unknown> => {
+export const disburseDonation = async (id: string, password: string, token: string, account_number: string, bank_code: string, account_name: string): Promise<unknown> => {
   const response = await axios.put(
     `${API_BASE_URL}/admin/disburse-donation/${id}`, 
     { 
       password, 
       account_number, 
-      bank_code 
+      bank_code,
+      account_name
     },
     {
       headers: {

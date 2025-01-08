@@ -14,8 +14,8 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
+    <div className="container mx-auto px-4 py-12 bg-emerald-50">
+      <h1 className="text-4xl font-bold mb-8 text-emerald-600">Contact Us</h1>
       <div className="max-w-2xl mx-auto">
         <Form
           fields={fields}

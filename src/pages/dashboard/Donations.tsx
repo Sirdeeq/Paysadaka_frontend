@@ -21,6 +21,7 @@ interface Donation {
   amount: number;
   paystack_reference: string;
   bank_code: string;
+  account_name: string;
 }
 
 export const Donations: React.FC = () => {
@@ -110,10 +111,10 @@ export const Donations: React.FC = () => {
       return;
     }
 
-    const { recipient: account_number, bank_code: bank_code } = donation;
+    const { recipient: account_number, bank_code: bank_code, account_name: account_name } = donation;
 
-    if (!account_number || !bank_code) {
-      toast.error("Account number and bank code are required.");
+    if (!account_number || !bank_code || !account_name) {
+      toast.error("Account number, account name and bank code are required.");
       return;
     }
 
@@ -133,7 +134,8 @@ export const Donations: React.FC = () => {
         password,
         token,
         account_number,
-        bank_code
+        bank_code,
+        account_name
       );
       console.log(response);
       toast.success("Donation disbursed successfully.");

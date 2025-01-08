@@ -1,5 +1,7 @@
 import React from 'react';
 import { CTA } from '../components/common/CTA';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock, faBook, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 
 export const Home: React.FC = () => {
   return (
@@ -7,11 +9,11 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="bg-emerald-50 py-20">
         <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold text-center mb-6">
+          <h1 className="text-5xl font-bold text-center mb-6 text-emerald-600">
             Empowering Masjids Through Donations
           </h1>
           <p className="text-xl text-center text-gray-600 max-w-2xl mx-auto">
-            PaySadaka makes it easy to contribute to mosques and charities in your area.
+            PaySadaka makes it easy to contribute to mosques, ramadan and charities in your area.
             Join us in making a difference.
           </p>
         </div>
@@ -26,14 +28,14 @@ export const Home: React.FC = () => {
       />
 
       {/* Icon Grid Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-emerald-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Icon 1 */}
             <div className="hover:scale-105 transition-transform duration-300 ease-in-out bg-white p-6 rounded-lg shadow-lg text-center">
               <div className="flex justify-center mb-4">
-                <span className="inline-block bg-emerald-100 text-emerald-600 p-4 rounded-full">
-                  <i className="fas fa-lock fa-2x"></i>
+                <span className="inline-block bg-yellow-200 text-emerald-600 p-4 rounded-full">
+                  <FontAwesomeIcon icon={faLock} size="2x" />
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Secure Donations</h3>
@@ -45,8 +47,8 @@ export const Home: React.FC = () => {
             {/* Icon 2 */}
             <div className="hover:scale-105 transition-transform duration-300 ease-in-out bg-white p-6 rounded-lg shadow-lg text-center">
               <div className="flex justify-center mb-4">
-                <span className="inline-block bg-emerald-100 text-emerald-600 p-4 rounded-full">
-                  <i className="fas fa-book fa-2x"></i>
+                <span className="inline-block bg-yellow-200 text-emerald-600 p-4 rounded-full">
+                  <FontAwesomeIcon icon={faBook} size="2x" />
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Transparent Records</h3>
@@ -58,8 +60,8 @@ export const Home: React.FC = () => {
             {/* Icon 3 */}
             <div className="hover:scale-105 transition-transform duration-300 ease-in-out bg-white p-6 rounded-lg shadow-lg text-center">
               <div className="flex justify-center mb-4">
-                <span className="inline-block bg-emerald-100 text-emerald-600 p-4 rounded-full">
-                  <i className="fas fa-exchange-alt fa-2x"></i>
+                <span className="inline-block bg-yellow-200 text-emerald-600 p-4 rounded-full">
+                  <FontAwesomeIcon icon={faExchangeAlt} size="2x" />
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Seamless Transfers</h3>

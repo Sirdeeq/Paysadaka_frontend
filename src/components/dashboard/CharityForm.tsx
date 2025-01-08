@@ -153,7 +153,7 @@ export const CharityForm: React.FC = () => {
 
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto mt-6 mb-6">
       <h2 className="text-2xl font-bold mb-6">Register New Charity Organization</h2>
 
       <div className="mb-6 flex flex-col items-center">
