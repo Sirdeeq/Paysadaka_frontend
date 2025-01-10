@@ -91,19 +91,25 @@ export const CharityForm: React.FC = () => {
       toast.error("Please select a bank and enter an account number");
       return;
     }
-
+  
+    // Validate account number format (must be 10 digits)
+    if (accountNumber.length !== 10 || !/^\d+$/.test(accountNumber)) {
+      toast.error("Please provide a valid account number");
+      return;
+    }
+  
     setIsResolving(true);
     try {
       const response = await axios.get("https://api.paystack.co/bank/resolve", {
         params: {
           account_number: accountNumber,
-          bank_code: selectedBankCode
+          bank_code: selectedBankCode,
         },
         headers: {
-          Authorization: `Bearer sk_live_539a8e65c94668909dd3cf565dfbe5f07f9105de`
-        }
+          Authorization: `Bearer ${process.env.REACT_APP_PAYSTACK_KEY}`,
+        },
       });
-
+  
       setAccountName(response.data.data.account_name);
       toast.success("Account resolved successfully");
     } catch (error) {
@@ -114,43 +120,50 @@ export const CharityForm: React.FC = () => {
       setIsResolving(false);
     }
   };
-
+  
   const handleSubmit = async (formData: Record<string, string | number>) => {
+    // Validate if logo is uploaded
+    if (!logoPreview) {
+      toast.error('Please upload a logo');
+      return;
+    }
+  
+    // Validate account number and bank details before submission
+    if (!selectedBankCode || !accountNumber || !accountName) {
+      toast.error('Please complete the bank details');
+      return;
+    }
+  
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append('name', String(formData.name));
+    formDataToSubmit.append('email', String(formData.email));
+    formDataToSubmit.append('phone_number', String(formData.phone_number));
+    formDataToSubmit.append('address', String(formData.address));
+    formDataToSubmit.append('website', String(formData.website));
+    formDataToSubmit.append('areaOfFocus', String(formData.areaOfFocus));
+    formDataToSubmit.append('bank_code', String(selectedBankCode)); // Ensure bank code is included
+    formDataToSubmit.append('bank_name', String(banks.find(bank => bank.code === selectedBankCode)?.name || ''));
+    formDataToSubmit.append('account_number', String(accountNumber));
+    formDataToSubmit.append('account_name', String(accountName));
+  
+    const logoFile = fileInputRef.current?.files?.[0];
+    if (logoFile) {
+      const logoFormData = new FormData();
+      logoFormData.append('file', logoFile);
+      const logoData: CloudinaryResponse = await uploadFile(logoFormData);
+      formDataToSubmit.set('logo', logoData.url);
+    }
+  
     try {
-      if (!logoPreview) {
-        toast.error('Please upload a logo');
-        return;
-      }
-
-      const formDataToSubmit = new FormData();
-      formDataToSubmit.append('name', String(formData.name));
-      formDataToSubmit.append('email', String(formData.email));
-      formDataToSubmit.append('phone_number', String(formData.phone_number));
-      formDataToSubmit.append('address', String(formData.address));
-      formDataToSubmit.append('website', String(formData.website));
-      formDataToSubmit.append('areaOfFocus', String(formData.areaOfFocus));
-      formDataToSubmit.append('bank_code', String(formData.bankCode)); // Ensure bank code is included
-      formDataToSubmit.append('bank_name', String(banks.find(bank => bank.code === formData.bankCode)?.name || ''));
-      formDataToSubmit.append('account_number', String(formData.account_number));
-      formDataToSubmit.append('account_name', String(formData.account_name));
-
-      const logoFile = fileInputRef.current?.files?.[0];
-      if (logoFile) {
-        const logoFormData = new FormData();
-        logoFormData.append('file', logoFile);
-        const logoData: CloudinaryResponse = await uploadFile(logoFormData);
-        formDataToSubmit.set('logo', logoData.url);
-      }
-
       await createCharity(formDataToSubmit);
-      toast.success('Charity organization created successfully');
+      toast.success('Charity organization created successfully. Please check your email for verification.');
       navigate('/');
     } catch (error: unknown) {
       console.error('Error creating charity:', error);
       toast.error('Failed to create charity organization');
     }
   };
-
+  
 
   return (
     <div className="max-w-4xl mx-auto mt-6 mb-6">

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Menu } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Menu } from "lucide-react";
 
 interface HeaderProps {
   menuItems: { label: string; path: string }[];
@@ -8,13 +8,21 @@ interface HeaderProps {
   onLogout?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ menuItems, isDashboard, onLogout }) => {
+export const Header: React.FC<HeaderProps> = ({
+  menuItems,
+  isDashboard,
+  onLogout
+}) => {
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-2xl font-bold text-emerald-600">
-            PaySadaka
+            <img
+              src="https://res.cloudinary.com/sirdurx/image/upload/v1736501176/kcnchwhx0injqs5saykv.png"
+              className="w-40 h-full object-contain"
+              alt="paysadaka logo"
+            />
           </Link>
 
           {isDashboard ? (

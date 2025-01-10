@@ -76,23 +76,23 @@ const Dashboard: React.FC = () => {
           value={balanceVisible && balance !== null ? `₦${balance?.toFixed(2)}` : '****'}
           icon={balanceVisible ? <EyeOff /> : <Eye />}
           onClick={toggleBalanceVisibility}
-          className="w-40 h-40 bg-gradient-to-r from-purple-500 to-purple-600 text-white"
+          className="w-full h-40  text-blue-800"
         >
           <Button
             label="Show Balance"
             onClick={handleBalanceClick}
-            className="w-full mt-2 text-white"
+            className="w-full mt-2 text-blue-800 bg-transparent hover:bg-blue-800 hover:text-white"
           />
         </Card>
 
         {/* Total Donation Card */}
-        <Card
+        {/* <Card
           label="Total Donations"
           // icon={<DollarSign />}
           icon={balanceVisible ? <EyeOff /> : <Eye />}
           onClick={() => navigate('/dashboard/donations')}
           className="w-40 h-40 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white"
-        />
+        /> */}
 
         {/* Approved Donations Card */}
         {/* <Card

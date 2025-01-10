@@ -6,17 +6,32 @@ import Modal from '../../components/common/Modal';
 
 export const Masjids: React.FC = () => {
   const [masjids, setMasjids] = useState<Organization[]>([]);
+  const [filteredMasjids, setFilteredMasjids] = useState<Organization[]>([]);
   const [selectedMasjid, setSelectedMasjid] = useState<Organization | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     loadMasjids();
   }, []);
 
+  useEffect(() => {
+    // Filter masjids based on search query
+    const filtered = masjids.filter((masjid) => {
+      const query = searchQuery.toLowerCase();
+      return (
+        masjid.name.toLowerCase().includes(query) ||
+        masjid.address.toLowerCase().includes(query)
+      );
+    });
+    setFilteredMasjids(filtered);
+  }, [searchQuery, masjids]);
+
   const loadMasjids = async () => {
     try {
       const data = await fetchMasjids();
       setMasjids(data);
+      setFilteredMasjids(data); // Set initial filtered data to all masjids
     } catch (error) {
       console.error('Error loading masjids:', error);
     }
@@ -55,8 +70,21 @@ export const Masjids: React.FC = () => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Manage Masjids</h1>
+
+      {/* Search Bar */}
+      <div className="mb-4 flex space-x-2">
+        <input
+          type="text"
+          placeholder="Search by Name or Address"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="p-2 border border-gray-300 rounded w-full"
+        />
+      </div>
+
+      {/* Table */}
       <Table
-        data={masjids}
+        data={filteredMasjids}
         columns={columns}
         onView={(item) => {
           setSelectedMasjid(item);
@@ -64,6 +92,7 @@ export const Masjids: React.FC = () => {
         }}
       />
 
+      {/* Modal */}
       {isModalOpen && selectedMasjid && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <div className="p-6">

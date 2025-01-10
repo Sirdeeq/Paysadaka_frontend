@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Form } from "../common/Form";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Upload } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { createMasjid } from "../../services/organizations";
+import { uploadFile } from "../../services/api";
 
 interface Bank {
   name: string;
   code: string;
+}
+
+interface CloudinaryResponse {
+  public_id: string;
+  url: string;
 }
 
 export const MasjidForm: React.FC = () => {
@@ -19,6 +25,27 @@ export const MasjidForm: React.FC = () => {
   const [accountNumber, setAccountNumber] = useState("");
   const [accountName, setAccountName] = useState("");
   const [isResolving, setIsResolving] = useState(false);
+  const [logoPreview, setLogoPreview] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("Logo file size must be less than 10MB");
+        return;
+      }
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please upload an image file");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogoPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   const fields = [
     { name: "name", label: "Masjid Name", type: "text", required: true },
@@ -37,8 +64,8 @@ export const MasjidForm: React.FC = () => {
       try {
         const response = await axios.get("https://api.paystack.co/bank", {
           headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_PAYSTACK_KEY}`,
-          },
+            Authorization: `Bearer ${process.env.REACT_APP_PAYSTACK_KEY}`
+          }
         });
         const uniqueBanks = response.data.data.reduce((acc, bank) => {
           if (!acc.some((b) => b.code === bank.code)) {
@@ -52,7 +79,7 @@ export const MasjidForm: React.FC = () => {
         toast.error("Failed to load bank list");
       }
     };
-    
+
     fetchBanks();
   }, []);
 
@@ -86,39 +113,92 @@ export const MasjidForm: React.FC = () => {
   };
 
   const handleSubmit = async (formData: Record<string, string | number>) => {
-    if (!selectedBankCode) {
-      toast.error("Please select a bank");
-      return;
-    }
-
-    if (!accountName) {
-      toast.error("Please resolve the account details first");
-      return;
-    }
-
-    const masjidData = {
-      name: formData.name,
-      email: formData.email,
-      phone_number: formData.phone_number,
-      address: formData.address,
-      bank_details: {
-        bank_name:
-          banks.find((bank) => bank.code === selectedBankCode)?.name || "",
-        account_number: accountNumber,
-        account_name: accountName,
-        bank_code: selectedBankCode
+    try {
+      if (!logoPreview) {
+        toast.error("Please upload a logo");
+        return;
       }
-    };
 
-    console.log("Masjid Data Submitted:", JSON.stringify(masjidData, null, 2));
-    await createMasjid(masjidData);
-    toast.success("Masjid created successfully");
-    navigate("/");
+      if (!selectedBankCode) {
+        toast.error("Please select a bank");
+        return;
+      }
+
+      if (!accountName) {
+        toast.error("Please resolve the account details first");
+        return;
+      }
+
+      const logoFile = fileInputRef.current?.files?.[0];
+      let logoUrl = "";
+      if (logoFile) {
+        const logoFormData = new FormData();
+        logoFormData.append("file", logoFile);
+        const logoData: CloudinaryResponse = await uploadFile(logoFormData);
+        logoUrl = logoData.url;
+      }
+
+      const masjidData = {
+        name: formData.name,
+        email: formData.email,
+        phone_number: formData.phone_number,
+        address: formData.address,
+        logo: logoUrl,
+        bank_details: {
+          bank_name:
+            banks.find((bank) => bank.code === selectedBankCode)?.name || "",
+          account_number: accountNumber,
+          account_name: accountName,
+          bank_code: selectedBankCode
+        }
+      };
+
+      console.log(
+        "Masjid Data Submitted:",
+        JSON.stringify(masjidData, null, 2)
+      );
+      await createMasjid(masjidData);
+      toast.success("Masjid created successfully.  Please check your email for verification.");
+      navigate("/");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("Failed to create Masjid");
+    }
   };
 
   return (
     <div className="max-w-4xl mx-auto mt-6 mb-6">
       <h2 className="text-2xl font-bold mb-6">Register New Masjid</h2>
+      <div className="mb-6 flex flex-col items-center">
+        <div
+          className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 mb-4 flex items-center justify-center cursor-pointer"
+          onClick={() => fileInputRef.current?.click()}
+        >
+          {logoPreview ? (
+            <img
+              src={logoPreview}
+              alt="Logo Preview"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <Upload className="w-8 h-8 text-gray-400" />
+          )}
+        </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          onChange={handleLogoUpload}
+          className="hidden"
+        />
+        <button
+          type="button"
+          onClick={() => fileInputRef.current?.click()}
+          className="text-sm text-emerald-600 hover:text-emerald-700"
+        >
+          {logoPreview ? "Change Logo" : "Upload Logo"}
+        </button>
+      </div>
       <Form
         fields={[
           ...fields,
@@ -164,10 +244,11 @@ export const MasjidForm: React.FC = () => {
                         Account Number
                       </label>
                       <input
-                        type="text"
+                        type="tel"
                         value={accountNumber}
                         onChange={(e) => {
                           const input = e.target.value;
+                          // Ensure only digits are allowed
                           if (/^\d*$/.test(input)) {
                             setAccountNumber(input);
                           }
@@ -176,6 +257,7 @@ export const MasjidForm: React.FC = () => {
                         maxLength={10}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                       />
+
                       <button
                         type="button"
                         onClick={resolveAccountName}

@@ -9,7 +9,7 @@ const Login = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "newadmin@example.com",
+    email: "paysadaka@admin.com",
     password: "securePassword123",
     disablePassword: false
   });

@@ -18,8 +18,9 @@ export const OrganizationList: React.FC<OrganizationListProps> = ({
           onClick={() => onSelect(org)}
           className="flex flex-col bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
         >
+          {/* Ensure you use org.logo.url to display the image */}
           <img
-            src={org.image}
+            src={org.logo.url}
             alt={org.name}
             className="w-full h-48 object-cover"
           />
