@@ -81,7 +81,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
         disabled: isAnonymous 
       }
     ]),
-    { name: 'email', label: 'Email', type: 'email', required: true, value: isAnonymous ? 'anonymous@donation.com' : '', disabled: isAnonymous },
+    // { name: 'email', label: 'Email', type: 'email', required: true, value: isAnonymous ? 'anonymous@donation.com' : '', disabled: isAnonymous },
     { 
       name: 'amount', 
       label: 'Amount',
@@ -115,7 +115,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
   const handleSubmit = (formData: Record<string, string | number>) => {
     const submissionData: DonationFormData = {
       donor_name: isDonatingAsOrg ? String(formData.organization_name) : (isAnonymous ? 'Anonymous' : String(formData.donor_name)),
-      email: isAnonymous ? 'anonymous@donation.com' : String(formData.email),
+      email: 'paysadaqa@gmail.com',
       amount: selectedAmount || Number(customAmount),
       category: String(formData.category),
       recipient_account_number: organization.bank_details.account_number,

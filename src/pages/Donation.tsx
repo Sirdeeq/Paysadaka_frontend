@@ -55,8 +55,8 @@ export const Donation: React.FC = () => {
 
     try {
       const handler = window.PaystackPop.setup({
-        // key: 'pk_live_933acab3b74765444ebd05dfe9a994a9bcfe66aa', 
-        key: 'pk_test_eb240d0c4d463a9b71988e41240e86cc654ce2dd', 
+        key: 'pk_live_3cb69488f18d1836b9355f99c46ec9e020684770',
+        // key: 'pk_test_eb240d0c4d463a9b71988e41240e86cc654ce2dd', 
         email: formData.email,
         amount: formData.amount * 100,
         currency: "NGN",

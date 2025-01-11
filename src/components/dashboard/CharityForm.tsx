@@ -106,7 +106,7 @@ export const CharityForm: React.FC = () => {
           bank_code: selectedBankCode,
         },
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_PAYSTACK_KEY}`,
+          Authorization: `Bearer sk_live_230721f8b811f7f027477d9442ac547a4f28848a`
         },
       });
   
