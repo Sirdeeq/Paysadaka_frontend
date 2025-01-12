@@ -34,7 +34,7 @@ export const LandingLayout: React.FC = () => {
               <li key={index}>
                 <Link
                   to={item.path}
-                  className="text-gray-700 hover:text-gray-500 transition-colors font-medium"
+                  className="text-emerald-600 hover:text-gray-500 transition-colors font-medium"
                 >
                   {item.label}
                 </Link>
@@ -45,7 +45,7 @@ export const LandingLayout: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-700 focus:outline-none"
+          className="md:hidden text-emerald-600 focus:outline-none"
           id="mobile-menu-toggle"
           onClick={() => {
             const menu = document.getElementById('mobile-menu');
@@ -72,14 +72,14 @@ export const LandingLayout: React.FC = () => {
       {/* Mobile Menu */}
       <nav
         id="mobile-menu"
-        className="hidden md:hidden bg-white shadow-md p-4"
+        className="hidden md:hidden bg-emerald-50 shadow-md p-4"
       >
         <ul className="flex flex-col space-y-4">
           {menuItems.map((item, index) => (
             <li key={index}>
               <Link
                 to={item.path}
-                className="text-gray-700 hover:text-gray-500 transition-colors font-medium"
+                className="text-emerald-600 hover:text-gray-500 transition-colors font-medium"
               >
                 {item.label}
               </Link>

@@ -14,7 +14,7 @@ export const LiveSupport: React.FC = () => {
         <div className="p-4 space-y-3">
           <a
             href="mailto:support@paysadaka.com"
-            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-md"
+            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-emerald-50 rounded-md"
           >
             <Mail className="w-5 h-5" />
             <span>Email Support</span>
@@ -23,14 +23,14 @@ export const LiveSupport: React.FC = () => {
             href="https://wa.me/1234567890"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-md"
+            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-emerald-50 rounded-md"
           >
             <Phone className="w-5 h-5" />
             <span>WhatsApp</span>
           </a>
           <button
             onClick={() => {/* Implement live chat */}}
-            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-md w-full"
+            className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-emerald-50 rounded-md w-full"
           >
             <MessageCircle className="w-5 h-5" />
             <span>Live Chat</span>

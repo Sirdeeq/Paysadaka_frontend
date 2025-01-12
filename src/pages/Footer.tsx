@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
                 href="mailto:info@paysadaqa.com"
                 className="text-emerald-50 hover:underline"
               >
-                info@paysadaqa.com
+                paysadaqa@gmail.com
               </a>
             </p>
             <p className="text-emerald-50">
@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
         {/* Divider */}
         <div className="mt-8 border-t border-emerald-50 pt-4 text-center">
           <p className="text-emerald-50 text-sm">
-            &copy; 2024 paysadaqa Donation Platform. All rights reserved.
+            &copy; 2025 paysadaqa Donation Platform. All rights reserved.
           </p>
         </div>
       </div>

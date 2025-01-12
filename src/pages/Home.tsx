@@ -38,8 +38,8 @@ export const Home: React.FC = () => {
                   <FontAwesomeIcon icon={faLock} size="2x" />
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Secure Donations</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-emerald-600 mb-2">Secure Donations</h3>
+              <p className="text-gray-500">
                 Your contributions are processed with top-tier security protocols.
               </p>
             </div>
@@ -51,8 +51,8 @@ export const Home: React.FC = () => {
                   <FontAwesomeIcon icon={faBook} size="2x" />
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Transparent Records</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-emerald-600 mb-2">Transparent Records</h3>
+              <p className="text-gray-500">
                 Track all donations with detailed transaction records.
               </p>
             </div>
@@ -64,8 +64,8 @@ export const Home: React.FC = () => {
                   <FontAwesomeIcon icon={faExchangeAlt} size="2x" />
                 </span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Seamless Transfers</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-emerald-600 mb-2">Seamless Transfers</h3>
+              <p className="text-gray-500">
                 Quick and hassle-free transfers directly to the Masjids.
               </p>
             </div>
