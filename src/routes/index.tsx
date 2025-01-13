@@ -1,5 +1,4 @@
-
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { LandingLayout } from '../layouts/LandingLayout';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 import { Home } from '../pages/Home';
@@ -16,6 +15,7 @@ import ProtectedRoute from '../components/common/ProtectedRoute';
 import Login from '../pages/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
 import { Footer } from '../pages/Footer';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -29,12 +29,12 @@ export const router = createBrowserRouter([
       { path: 'new-charity', element: <CharityForm /> },
       { path: 'verify-masjid/:id/:token', element: <VerificationCard type="masjid" /> },
       { path: 'verify-charity/:id/:token', element: <VerificationCard type="charity" /> },
-      { path: 'login', element: <Login /> },
+      { path: 'login', element: <Login /> },  // Login page accessible without authentication
       { path: 'footer', element: <Footer />},
     ],
   },
   {
-    path: '/dashboard',
+    path: 'dashboard',
     element: <ProtectedRoute />,  // Wrap the dashboard route to check if the user is logged in
     children: [
       {
@@ -49,5 +49,9 @@ export const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: '*',  // This is the catch-all route for non-existent paths
+    element: <Navigate to="/" replace />,  // Redirect to home page if path doesn't exist
   },
 ]);

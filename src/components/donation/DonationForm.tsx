@@ -104,7 +104,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
     { 
       name: 'recipient_account_number',
       label: 'Account Number',
-      type: 'text',
+      type: 'password',
       value: organization.bank_details.account_number,
       required: true,
       disabled: true

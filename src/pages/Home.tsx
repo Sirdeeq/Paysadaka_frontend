@@ -2,8 +2,13 @@ import React from 'react';
 import { CTA } from '../components/common/CTA';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faBook, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const handleDonateClick = () => {
+    navigate('/donation');
+  };
   return (
     <div>
       {/* Hero Section */}
@@ -24,7 +29,7 @@ export const Home: React.FC = () => {
         title="Ready to Make a Difference?"
         description="Join thousands of donors supporting their local communities"
         buttonText="Start Donating"
-        onClick={() => (window.location.href = '/donation')}
+        onClick={handleDonateClick}
       />
 
       {/* Icon Grid Section */}
