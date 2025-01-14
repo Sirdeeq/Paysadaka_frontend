@@ -90,8 +90,11 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-emerald-50">
       <div className="bg-white shadow-md rounded-lg p-8 w-96">
         <h2 className="text-2xl font-bold text-green-600 text-center mb-6">
-          {isLogin ? "Login" : "Sign Up"}
+          {isLogin ? "Welcome Back" : "Sign Up"}
         </h2>
+        <p className="text-sm text-gray-600 text-center mb-4 capitalize">
+          enter password to login
+        </p>
 
         {!isLogin && (
           <div className="mb-4">
@@ -110,7 +113,7 @@ const Login = () => {
           </div>
         )}
 
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Email
           </label>
@@ -123,12 +126,9 @@ const Login = () => {
             placeholder="Enter your email"
             required
           />
-        </div>
+        </div> */}
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Password
-          </label>
           <input
             type="password"
             name="password"

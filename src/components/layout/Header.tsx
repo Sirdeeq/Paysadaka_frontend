@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
-import Logo from "../../assets/images/Paysadaqa.png";
+import Logo from "../../../public/images/Paysadaqa.png";
+
 
 interface HeaderProps {
   menuItems: { label: string; path: string }[];
@@ -20,6 +21,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-2xl font-bold text-emerald-600">
             <img
+              src={Logo}
               className="w-40 h-full object-contain"
               alt="paysadaka logo"
             />
