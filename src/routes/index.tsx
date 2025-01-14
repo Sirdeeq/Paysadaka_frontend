@@ -9,12 +9,12 @@ import { Masjids } from '../pages/dashboard/Masjids';
 import { Charities } from '../pages/dashboard/Charities';
 import VerificationCard from '../components/common/VerificationCard';
 import { MasjidForm } from '../components/dashboard/MasjidForm';
-import { CharityForm } from '../components/dashboard/CharityForm';
 import { Donations } from '../pages/dashboard/Donations';
 import ProtectedRoute from '../components/common/ProtectedRoute';
 import Login from '../pages/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
 import { Footer } from '../pages/Footer';
+import CharityForm from '../components/dashboard/CharityForm';
 
 const isAuthenticated = () => {
   // Implement your authentication logic here (check local storage, cookies, or context)

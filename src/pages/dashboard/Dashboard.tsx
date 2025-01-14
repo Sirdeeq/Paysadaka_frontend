@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Building2, Heart, Eye, EyeOff } from 'lucide-react';
 import { MasjidForm } from '../../components/dashboard/MasjidForm';
-import { CharityForm } from '../../components/dashboard/CharityForm';
 import { adminBalance } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { Card } from './component/Card';
 import { Button } from '../../components/common/Button';
+import CharityForm from '../../components/dashboard/CharityForm';
 
 const Dashboard: React.FC = () => {
   const [activeForm, setActiveForm] = useState<'masjid' | 'charity' | null>(null);

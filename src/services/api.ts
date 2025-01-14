@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
-import { CharityData } from './organizations';
+import { CharityData, MasjidData } from './organizations';
 
 // const API_BASE_URL = 'http://localhost:5000/api';
 const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
@@ -20,6 +20,11 @@ export const fetchCharities = async (): Promise<Organization[]> => {
 /** Submit Donation */
 export const submitDonation = async (donationData: DonationFormData): Promise<unknown> => {
   const response = await axios.post(`${API_BASE_URL}/donations/donate`, donationData);
+  return response.data;
+};
+
+export const createMasjid = async (data: MasjidData) => {
+  const response = await axios.post(`${API_BASE_URL}/masjids/register`, data);
   return response.data;
 };
 
