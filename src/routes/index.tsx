@@ -16,6 +16,11 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/dashboard/Dashboard';
 import { Footer } from '../pages/Footer';
 
+const isAuthenticated = () => {
+  // Implement your authentication logic here (check local storage, cookies, or context)
+  return localStorage.getItem('user') !== null;
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -29,13 +34,16 @@ export const router = createBrowserRouter([
       { path: 'new-charity', element: <CharityForm /> },
       { path: 'verify-masjid/:id/:token', element: <VerificationCard type="masjid" /> },
       { path: 'verify-charity/:id/:token', element: <VerificationCard type="charity" /> },
-      { path: 'login', element: <Login /> },  // Login page accessible without authentication
-      { path: 'footer', element: <Footer />},
+      {
+        path: 'login',
+        element: isAuthenticated() ? <Navigate to="/" /> : <Login />,
+      },
+      { path: 'footer', element: <Footer /> },
     ],
   },
   {
     path: 'dashboard',
-    element: <ProtectedRoute />,  // Wrap the dashboard route to check if the user is logged in
+    element: <ProtectedRoute />,
     children: [
       {
         path: '',
@@ -45,13 +53,12 @@ export const router = createBrowserRouter([
           { path: 'masjids', element: <Masjids /> },
           { path: 'charities', element: <Charities /> },
           { path: 'donations', element: <Donations /> },
-          // { path: 'approved-donations', element: <ApprovedDonations /> },
         ],
       },
     ],
   },
   {
-    path: '*',  // This is the catch-all route for non-existent paths
-    element: <Navigate to="/" replace />,  // Redirect to home page if path doesn't exist
+    path: '*', 
+    element: <Navigate to="/" replace />, 
   },
 ]);
