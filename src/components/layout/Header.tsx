@@ -20,7 +20,6 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-2xl font-bold text-emerald-600">
             <img
-              src="/assets/images/Paysadaqa.png"
               className="w-40 h-full object-contain"
               alt="paysadaka logo"
             />

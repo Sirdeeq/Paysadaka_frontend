@@ -3,6 +3,7 @@ import { Outlet, Link } from 'react-router-dom';
 import { LiveSupport } from '../components/common/LiveSupport';
 import StickyButton from '../pages/StickyButton';
 import { Footer } from '../pages/Footer';
+import hi from "../../public/images/Paysadaqa.png"
 
 const menuItems = [
   { label: 'Home', path: '/' },
@@ -22,7 +23,7 @@ export const LandingLayout: React.FC = () => {
         {/* Logo Section */}
         <Link to="/">
           <img
-            src="../src/assets/images/Paysadaqa.png" // Update this path to your logo's location
+            src={hi}
             alt="Website Logo"
             className="w-20 sm:w-24 md:w-32 lg:w-40 h-auto"
           />
