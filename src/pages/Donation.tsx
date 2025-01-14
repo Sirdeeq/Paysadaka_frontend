@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -104,8 +104,8 @@ export const Donation: React.FC = () => {
   
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-center mb-12">Make a Donation</h1>
+    <div className="container mx-auto px-4 py-12 bg-emerald-50">
+      <h1 className="text-emerald-600 text-4xl font-bold text-center mb-12">Make a Donation</h1>
 
       {step === "type" && <DonationType onSelect={handleTypeSelect} />}
       {step === "list" && organizations.length > 0 && (

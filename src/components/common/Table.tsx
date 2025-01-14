@@ -12,7 +12,7 @@ export function Table<T>({ data, columns, onView, onDelete }: TableProps<T>) {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+        <thead className="bg-emerald-50">
           <tr>
             {columns.map((column) => (
               <th

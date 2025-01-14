@@ -167,8 +167,8 @@ export const MasjidForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-6 mb-6">
-      <h2 className="text-2xl font-bold mb-6">Register New Masjid</h2>
+    <div className="max-w-4xl mx-auto mt-6 mb-6 bg-emerald-50 px-6 py-6">
+      <h2 className="text-emerald-600 text-2xl font-bold mb-6">Register New Masjid</h2>
       <div className="mb-6 flex flex-col items-center">
         <div
           className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 mb-4 flex items-center justify-center cursor-pointer"

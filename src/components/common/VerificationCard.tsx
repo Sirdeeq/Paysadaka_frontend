@@ -85,7 +85,7 @@ const VerificationCard = ({ type }: { type: 'masjid' | 'charity' }    ) => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-2xl font-bold text-center text-green-600 mb-6">Welcome to Pay Sadaka</h1>
-        <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+        <div className="bg-emerald-50 p-6 rounded-lg shadow-sm">
           <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">
             Verification for {name}
           </h2>

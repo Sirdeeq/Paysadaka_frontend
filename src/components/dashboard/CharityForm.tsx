@@ -182,6 +182,7 @@ export const CharityForm: React.FC = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="max-w-4xl mx-auto mt-6 mb-6">
       <h2 className="text-2xl font-bold mb-6">
         Register New Charity Organization
@@ -190,6 +191,14 @@ export const CharityForm: React.FC = () => {
       <div className="mb-6 flex flex-col items-center">
         <div
           className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 mb-4 flex items-center justify-center cursor-pointer"
+=======
+    <div className="max-w-4xl mx-auto mt-6 mb-6 bg-emerald-50 px-6 py-6">
+      <h2 className="text-emerald-600 text-2xl font-bold mb-6">Register New Charity Organization</h2>
+
+      <div className="mb-6 flex flex-col items-center">
+        <div 
+          className="w-32 h-32 rounded-full overflow-hidden bg-emerald-50 mb-4 flex items-center justify-center cursor-pointer"
+>>>>>>> 19da23c6f20f7b069e6d43dddd287453ffe2680e
           onClick={() => fileInputRef.current?.click()}
         >
           {logoPreview ? (
