@@ -9,8 +9,8 @@ const Login = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "paysadaka@admin.com",
-    password: "securePassword123",
+    email: "",
+    password: "",
     disablePassword: false
   });
 
@@ -113,7 +113,7 @@ const Login = () => {
           </div>
         )}
 
-        {/* <div className="mb-4">
+        <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Email
           </label>
@@ -126,7 +126,7 @@ const Login = () => {
             placeholder="Enter your email"
             required
           />
-        </div> */}
+        </div>
 
         <div className="mb-4">
           <input
