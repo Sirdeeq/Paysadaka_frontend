@@ -153,7 +153,7 @@ export const CharityForm: React.FC = () => {
     formDataToSubmit.append("address", String(formData.address));
     formDataToSubmit.append("website", String(formData.website));
     formDataToSubmit.append("areaOfFocus", String(formData.areaOfFocus));
-    formDataToSubmit.append("bank_code", String(selectedBankCode)); // Ensure bank code is included
+    formDataToSubmit.append("bank_code", String(selectedBankCode));
     formDataToSubmit.append(
       "bank_name",
       String(banks.find((bank) => bank.code === selectedBankCode)?.name || "")
