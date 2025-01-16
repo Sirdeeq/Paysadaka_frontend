@@ -47,9 +47,9 @@ export const Masjids: React.FC = () => {
   };
 
   const columns = [
-    { header: 'Name', accessor: 'name' as keyof Organization },
-    { header: 'Address', accessor: 'address' as keyof Organization },
-    { header: 'Phone', accessor: 'phone_number' as keyof Organization },
+    { header: 'Masjid Name', accessor: 'name' as keyof Organization },
+    { header: 'Masjid Address', accessor: 'address' as keyof Organization },
+    { header: 'Masjid Phone  No.', accessor: 'phone_number' as keyof Organization },
     {
       header: 'Balance',
       accessor: 'masjid_balance' as keyof Organization,

@@ -17,22 +17,29 @@ export const Donation: React.FC = () => {
   );
   const [organizations, setOrganizations] = useState<Organization[]>([]);
   const [selectedOrg, setSelectedOrg] = useState<Organization | null>(null);
-
+  
   useEffect(() => {
     const loadOrganizations = async () => {
       try {
+        // Fetch organizations based on the donation type
         const data =
           donationType === "masjid"
             ? await fetchMasjids()
             : await fetchCharities();
-        setOrganizations(data);
+  
+        // Filter only verified organizations
+        const verifiedOrganizations = data.filter((org: Organization) => org.is_verified);
+  
+        // Set the filtered organizations to state
+        setOrganizations(verifiedOrganizations);
       } catch (error) {
         toast.error("Failed to load organizations");
       }
     };
-
+  
     if (donationType) loadOrganizations();
   }, [donationType]);
+  
 
   const handleTypeSelect = (type: "masjid" | "charity") => {
     setDonationType(type);
