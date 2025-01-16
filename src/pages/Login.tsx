@@ -27,25 +27,28 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await adminLogin(formData.email, formData.password);
-      console.log("Raw response from backend:", response);
-  
-      // Check the response structure
-      console.log("Response data:", response.data);
-  
+
+      // Ensure you log the response structure for debugging
+      console.log("Login response:", response);
+
       const token = response?.token;
       const user = response.data?.user;
-  
+
       if (!token) {
         throw new Error("Token is missing in the response.");
       }
-  
+
+      // Store token and user data
       localStorage.setItem("authToken", token);
       localStorage.setItem("adminPassword", formData.password);
       if (user) {
         localStorage.setItem("userData", JSON.stringify(user));
       }
-  
-      toast.success("Login successful");
+
+      // Show success toast
+      toast.success("Login successful!");
+
+      // Navigate to dashboard
       navigate("/dashboard");
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
@@ -61,10 +64,6 @@ const Login = () => {
       }
     }
   };
-  
-  
-  
-  
 
   const handleSignUp = async () => {
     try {
