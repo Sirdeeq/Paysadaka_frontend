@@ -12,7 +12,7 @@ const menuItems = [
   { label: 'Contact', path: '/contact' },
   { label: 'New Masjid', path: '/new-masjid' },
   { label: 'New Charity', path: '/new-charity' },
-  { label: 'Admin', path: '/login' },
+  // { label: 'Admin', path: '/login' },
 ];
 
 export const LandingLayout: React.FC = () => {
