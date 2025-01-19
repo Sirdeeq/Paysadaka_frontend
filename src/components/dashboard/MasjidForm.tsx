@@ -74,7 +74,7 @@ export const MasjidForm: React.FC = () => {
       console.log("Submitting FormData:", formData);
 
       // Submit to API
-      await createMasjid(formData); // Assuming createMasjid handles multipart requests
+      await createMasjid(formData);
       toast.success("Form submitted successfully.");
       navigate("/");
     } catch (error) {

@@ -89,13 +89,9 @@ function CharityForm() {
       formData.append("account_name", bankDetails?.account_name);
 
       // Submit to API
-      const response = await createCharity(formData); // Assuming createCharity handles multipart requests
-      if (response.status === 201) {
-        toast.success("Form submitted successfully.");
-        navigate("/"); // Redirect after successful submission
-      } else {
-        toast.error("Failed to submit the form.");
-      }
+      await createCharity(formData);
+      toast.success("Organization registered successfully");
+      navigate("/");
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("An error occurred while submitting the form.");

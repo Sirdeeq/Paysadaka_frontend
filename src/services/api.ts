@@ -44,6 +44,7 @@ export const verifyCharity = async (token: string): Promise<unknown> => {
   return response.data;
 };
 
+
 /** Fetch Masjid by ID */
 export const fetchMasjidById = async (id: string): Promise<Organization> => {
   const response = await axios.get(`${API_BASE_URL}/masjids/get_one_masjid/${id}`);
@@ -151,5 +152,45 @@ export const adminLogin = async (email: string, password: string): Promise<unkno
 /** Admin Signup */
 export const adminSignup = async (name: string, email: string, password: string): Promise<unknown> => {
   const response = await axios.post(`${API_BASE_URL}/admin/create`, { name, email, password });
+  return response.data;
+};
+
+/** Verify Masjid */
+export const verifyMasjidByAdmin = async (id: string, token: string): Promise<unknown> => {
+  const response = await axios.put(`${API_BASE_URL}/admin/verify-masjid/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+/** Verify Charity */
+export const verifyCharityByAdmin = async (id: string, token: string): Promise<unknown> => {
+  const response = await axios.put(`${API_BASE_URL}/admin/verify-charity/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+/** Block Masjid */
+export const blockMasjidByAdmin = async (id: string, token: string): Promise<unknown> => {
+  const response = await axios.put(`${API_BASE_URL}/admin/unverify-masjid/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
+
+/** Block Charity */
+export const blockCharityByAdmin = async (id: string, token: string): Promise<unknown> => {
+  const response = await axios.put(`${API_BASE_URL}/admin/unverify-charity/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
