@@ -7,7 +7,6 @@ import {
 } from "../../services/api";
 import Modal from "../../components/common/Modal";
 import { toast } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { Check, Eye } from "lucide-react";
 
 // Donation Interface
@@ -22,6 +21,7 @@ interface Donation {
   paystack_reference: string;
   bank_code: string;
   account_name: string;
+  bank_name: string;
 }
 
 export const Donations: React.FC = () => {
@@ -30,7 +30,7 @@ export const Donations: React.FC = () => {
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     loadDonations();
@@ -111,7 +111,11 @@ export const Donations: React.FC = () => {
       return;
     }
 
-    const { recipient: account_number, bank_code: bank_code, account_name: account_name } = donation;
+    const {
+      recipient: account_number,
+      bank_code: bank_code,
+      account_name: account_name
+    } = donation;
 
     if (!account_number || !bank_code || !account_name) {
       toast.error("Account number, account name and bank code are required.");
@@ -153,6 +157,8 @@ export const Donations: React.FC = () => {
     },
     { header: "Donation ID", accessor: "_id" },
     { header: "Organization Account Number", accessor: "recipient" },
+    { header: "Bank Name", accessor: "bank_name" }, // New Column for Bank Name
+    { header: "Account Name", accessor: "account_name" }, // New Column for Account Name
     { header: "Status", accessor: "status" },
     { header: "Donor Name", accessor: "donor_name" },
     { header: "Category", accessor: "category" },
@@ -231,30 +237,83 @@ export const Donations: React.FC = () => {
 
       {isModalOpen && selectedDonation && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-2">
-              {selectedDonation.donor_name}
+          <div className="relative p-8 bg-white rounded-lg shadow-lg max-w-lg mx-auto transition-all transform duration-300 ease-in-out">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">
+              Donation Details
             </h2>
-            <p className="text-lg font-semibold text-gray-800">
-              Donation Amount: ₦{selectedDonation.amount.toFixed(2)}
-            </p>
-            <p className="text-lg font-semibold capitalize text-gray-800">
-              Donation Status: {selectedDonation.status}
-            </p>
-            <p className="text-lg font-semibold capitalize text-gray-800">
-              Donation Category: {selectedDonation.category}
-            </p>
-            <p className="text-lg font-semibold capitalize text-gray-800">
-              Donation Masjid: {selectedDonation.recipient}
-            </p>
+            <div className="space-y-4">
+              <p className="text-xl font-semibold text-gray-700">
+                Donor Name:{" "}
+                <span className="font-normal">
+                  {selectedDonation.donor_name}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Donation Amount:{" "}
+                <span className="font-normal">
+                  ₦{selectedDonation.amount.toFixed(2)}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Status:{" "}
+                <span className="font-normal capitalize">
+                  {selectedDonation.status}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Category:{" "}
+                <span className="font-normal capitalize">
+                  {selectedDonation.category}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Account Number:{" "}
+                <span className="font-normal">
+                  {selectedDonation.recipient}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Bank Name:{" "}
+                <span className="font-normal">
+                  {selectedDonation.bank_name || "N/A"}
+                </span>
+              </p>
+              <p className="text-xl font-semibold text-gray-700">
+                Account Name:{" "}
+                <span className="font-normal">
+                  {selectedDonation.account_name || "N/A"}
+                </span>
+              </p>
+            </div>
+
             {selectedDonation.status === "approved" && (
               <button
                 onClick={() =>
                   handleDisburse(selectedDonation._id, selectedDonation)
                 }
-                className="w-full mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex items-center"
+                className="mt-6 w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
               >
-                <Check className="mr-2" /> Disburse
+                <Check className="mr-2 inline-block" /> Disburse Donation
               </button>
             )}
           </div>
