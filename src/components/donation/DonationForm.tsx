@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Form } from '../common/Form';
-import type { Organization } from '../../types/donation';
-import { cn } from '../../utils';
+import React, { useState } from "react";
+import { Form } from "../common/Form";
+import type { Organization } from "../../types/donation";
+import { cn } from "../../utils";
 
 interface FormFieldBase {
   name: string;
@@ -10,17 +10,17 @@ interface FormFieldBase {
 }
 
 interface SelectFormField extends FormFieldBase {
-  type: 'select';
-  options: { value: string; label: string; }[];
+  type: "select";
+  options: { value: string; label: string }[];
 }
 
 interface HiddenFormField extends FormFieldBase {
-  type: 'hidden';
+  type: "hidden";
   value: string;
 }
 
 interface StandardFormField extends FormFieldBase {
-  type: 'text' | 'number' | 'email';
+  type: "text" | "number" | "email";
   value?: string | number;
   disabled?: boolean;
   hidden?: boolean;
@@ -45,84 +45,92 @@ interface DonationFormProps {
 }
 
 const PRESET_AMOUNTS = [
-  { label: '₦1,000', value: 1000 },
-  { label: '₦5,000', value: 5000 },
-  { label: '₦10,000', value: 10000 },
-  { label: '₦20,000', value: 20000 },
-  { label: '₦50,000', value: 50000 },
-  { label: '₦100,000', value: 100000 },
+  { label: "₦1,000", value: 1000 },
+  { label: "₦5,000", value: 5000 },
+  { label: "₦10,000", value: 10000 },
+  { label: "₦20,000", value: 20000 },
+  { label: "₦50,000", value: 50000 },
+  { label: "₦100,000", value: 100000 }
 ];
 
 export const DonationForm: React.FC<DonationFormProps> = ({
   organization,
-  onSubmit,
+  onSubmit
 }) => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
-  const [customAmount, setCustomAmount] = useState<string>('');
+  const [customAmount, setCustomAmount] = useState<string>("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [isDonatingAsOrg, setIsDonatingAsOrg] = useState(false);
   const [isCustomAmount, setIsCustomAmount] = useState(false);
 
   const fields: FormField[] = [
-    ...(isDonatingAsOrg ? [
-      { 
-        name: 'organization_name', 
-        label: 'Organization Name', 
-        type: 'text' as const,
-        required: true
-      }
-    ] : [
-      { 
-        name: 'donor_name', 
-        label: 'Your Name', 
-        type: 'text' as const,
-        required: true,
-        value: isAnonymous ? 'Anonymous' : '',
-        disabled: isAnonymous 
-      }
-    ]),
+    ...(isDonatingAsOrg
+      ? [
+          {
+            name: "organization_name",
+            label: "Organization Name",
+            type: "text" as const,
+            required: true
+          }
+        ]
+      : [
+          {
+            name: "donor_name",
+            label: "Your Name",
+            type: "text" as const,
+            required: true,
+            value: isAnonymous ? "Anonymous" : "",
+            disabled: isAnonymous
+          }
+        ]),
     // { name: 'email', label: 'Email', type: 'email', required: true, value: isAnonymous ? 'anonymous@donation.com' : '', disabled: isAnonymous },
-    { 
-      name: 'amount', 
-      label: 'Amount',
-      type: 'number', 
+    {
+      name: "amount",
+      label: "Amount",
+      type: "number",
       required: true,
       value: selectedAmount || customAmount,
       hidden: true
     },
     {
-      name: 'category',
-      label: 'Category',
-      type: 'select',
+      name: "category",
+      label: "Category",
+      type: "select",
       required: true,
       options: [
-        { value: 'masjid_donation', label: 'Masjid Donation' },
-        { value: 'ramadan', label: 'Ramadan' },
-        { value: 'eid', label: 'Eid' },
-      ],
+        { value: "masjid_donation", label: "Masjid Donation" },
+        { value: "ramadan", label: "Ramadan" },
+        { value: "eid", label: "Eid" }
+      ]
     },
-    { 
-      name: 'recipient_account_number',
-      label: 'Account Number',
-      type: 'password',
+    {
+      name: "recipient_account_number",
+      label: "Account Number",
+      type: "password",
       value: organization.bank_details.account_number,
       required: true,
       disabled: true
     }
-
   ];
 
   const handleSubmit = (formData: Record<string, string | number>) => {
     const submissionData: DonationFormData = {
-      donor_name: isDonatingAsOrg ? String(formData.organization_name) : (isAnonymous ? 'Anonymous' : String(formData.donor_name)),
-      email: 'paysadaqa@gmail.com',
+      donor_name: isDonatingAsOrg
+        ? String(formData.organization_name)
+        : isAnonymous
+        ? "Anonymous"
+        : String(formData.donor_name),
+      email: "paysadaqa@gmail.com",
       amount: selectedAmount || Number(customAmount),
       category: String(formData.category),
       recipient_account_number: organization.bank_details.account_number,
-      account_name: organization.bank_details.account_name,
-      organization_name: isDonatingAsOrg ? String(formData.organization_name) : undefined
+      account_name: organization.bank_details.account_number,
+      // organization_name: isDonatingAsOrg
+      //   ? organization.name
+      //   : undefined
+      organization_name: organization.name
     };
-    
+
     onSubmit(submissionData);
   };
 
@@ -132,6 +140,12 @@ export const DonationForm: React.FC<DonationFormProps> = ({
         <h3 className="font-semibold">Selected Organization:</h3>
         <p>{organization.name}</p>
         <p className="text-gray-600">{organization.address}</p>
+        <p className="text-gray-600">{organization.phone_number}</p>
+        {/* <p className="text-gray-600">Account Number: {organization.bank_details.account_number}</p>
+        <p className="text-gray-600">Account Name: {organization.bank_details.account_name}</p>
+        <p className="text-gray-600">Bank Code: {organization.bank_details.bank_code}</p>
+        <p className="text-gray-600">Email: paysadaqa@gmail.com</p>
+        <p className="text-gray-600">Website: {organization.id}</p> */}
       </div>
 
       {/* Amount Selection */}
@@ -146,7 +160,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
               type="button"
               onClick={() => {
                 setSelectedAmount(value);
-                setCustomAmount('');
+                setCustomAmount("");
                 setIsCustomAmount(false);
               }}
               className={cn(
@@ -169,13 +183,15 @@ export const DonationForm: React.FC<DonationFormProps> = ({
               onChange={(e) => {
                 setIsCustomAmount(e.target.checked);
                 if (!e.target.checked) {
-                  setCustomAmount('');
+                  setCustomAmount("");
                 }
                 setSelectedAmount(null);
               }}
               className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
             />
-            <span className="text-sm font-medium text-gray-700">Enter custom amount</span>
+            <span className="text-sm font-medium text-gray-700">
+              Enter custom amount
+            </span>
           </label>
 
           {isCustomAmount && (
@@ -204,7 +220,7 @@ export const DonationForm: React.FC<DonationFormProps> = ({
           />
           <span className="text-sm text-gray-700">Donate Anonymously</span>
         </label>
-        
+
         <label className="flex items-center space-x-2">
           <input
             type="checkbox"
@@ -212,7 +228,9 @@ export const DonationForm: React.FC<DonationFormProps> = ({
             onChange={(e) => setIsDonatingAsOrg(e.target.checked)}
             className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
           />
-          <span className="text-sm text-gray-700">Donate as an Organization</span>
+          <span className="text-sm text-gray-700">
+            Donate as an Organization
+          </span>
         </label>
       </div>
 
