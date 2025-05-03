@@ -9,12 +9,17 @@ export interface DonationFormData {
   account_name?: string;
   bank_name?: string;
   organization_id?: string;
+  donation_type: 'masjid' | 'charity';
+  net_amount: number;
+  paystack_reference: string;
+  receipt: string;
 }
 
 export interface DonationSubmissionData extends DonationFormData {
   donation_type: 'masjid' | 'charity';
   net_amount: number;
   paystack_reference: string;
+  receipt: string;
 }
 
 export interface Organization {

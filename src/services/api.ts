@@ -2,8 +2,8 @@ import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
 import { CharityData, MasjidData } from './organizations';
 
-// const API_BASE_URL = 'http://localhost:5000/api';
-const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
+const API_BASE_URL = 'http://localhost:50012/api';
+// const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
 
 // https://paysadaka-backend.onrender.com
 export const fetchMasjids = async (): Promise<Organization[]> => {
@@ -17,9 +17,18 @@ export const fetchCharities = async (): Promise<Organization[]> => {
   return response.data;
 };
 
-/** Submit Donation */
-export const submitDonation = async (donationData: DonationFormData): Promise<unknown> => {
-  const response = await axios.post(`${API_BASE_URL}/donations/donate`, donationData);
+
+export const submitDonation = async (donationData: DonationFormData | FormData): Promise<unknown> => {
+  const isFormData = donationData instanceof FormData;
+
+  const response = await axios.post(
+    `${API_BASE_URL}/donations/donate`,
+    donationData,
+    isFormData
+      ? { headers: { "Content-Type": "multipart/form-data" } }
+      : undefined
+  );
+
   return response.data;
 };
 
