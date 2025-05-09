@@ -2,8 +2,8 @@ import axios from 'axios';
 import type { Organization, DonationFormData } from '../types/donation';
 import { CharityData, MasjidData } from './organizations';
 
-const API_BASE_URL = 'http://localhost:50012/api';
-// const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
+// const API_BASE_URL = 'http://localhost:50012/api';
+const API_BASE_URL = 'https://paysadaka-backend.onrender.com/api';
 
 // https://paysadaka-backend.onrender.com
 export const fetchMasjids = async (): Promise<Organization[]> => {
