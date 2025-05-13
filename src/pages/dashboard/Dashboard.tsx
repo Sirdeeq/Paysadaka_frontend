@@ -278,7 +278,7 @@ const Dashboard: React.FC = () => {
           <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
             <div className="relative h-48 md:h-64 overflow-hidden">
               <img
-                src={mosqueImages[currentMosqueIndex] || "/images/masjid.png"}
+                src={mosqueImages[currentMosqueIndex] || "/masjid.png"}
                 alt="Featured Mosque"
                 className="w-full h-full object-cover transition-opacity duration-1000"
               />
