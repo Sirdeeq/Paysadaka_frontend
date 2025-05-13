@@ -104,14 +104,14 @@ const Login = () => {
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="rounded-lg overflow-hidden shadow-md">
               <img
-                src="/placeholder.svg?height=150&width=200"
+                src="/images/masjid interior.png"
                 alt="Mosque interior"
                 className="w-full h-32 object-cover"
               />
             </div>
             <div className="rounded-lg overflow-hidden shadow-md">
               <img
-                src="/placeholder.svg?height=150&width=200"
+                src="/images/charity.png"
                 alt="Charity work"
                 className="w-full h-32 object-cover"
               />
