@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               <FontAwesomeIcon icon={faEnvelope} className="mr-2 hover:text-yellow-200" />
               Email:{" "}
               <a
-                href="mailto:info@paysadaqa.com"
+                href="mailto:paysadaqa@gmail.com"
                 className="text-emerald-50 hover:underline"
               >
                 paysadaqa@gmail.com
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
             </p>
             <p className="text-emerald-50">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2 hover:text-yellow-200" />
-              Address: 123 Masjid Lane, Nigeria
+              Address: professor m/kaba Street, near old Airport, kano state,Nigeria-Branch office: no,52 kokoro abu Street lagos, Nigeria
             </p>
           </div>
         </div>
