@@ -60,6 +60,7 @@ export const Footer: React.FC = () => {
             <p className="text-emerald-50">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2 hover:text-yellow-200" />
               Address: professor m/kaba Street, near old Airport, kano state,Nigeria-Branch office: no,52 kokoro abu Street lagos, Nigeria
+              RC: 8384409
             </p>
           </div>
         </div>
