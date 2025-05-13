@@ -94,7 +94,7 @@ export const Services: React.FC = () => {
           >
             <div className={`${activeTab === "who" ? "md:w-1/3" : "h-48"} bg-emerald-600 relative overflow-hidden`}>
               <img
-                src="/images/masjid_interior.png"
+                src="/images/masjid interior.png"
                 alt="Mosque interior"
                 className="w-full h-full object-cover opacity-50"
               />
