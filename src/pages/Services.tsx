@@ -94,7 +94,7 @@ export const Services: React.FC = () => {
           >
             <div className={`${activeTab === "who" ? "md:w-1/3" : "h-48"} bg-emerald-600 relative overflow-hidden`}>
               <img
-                src="https://images.unsplash.com/photo-1584286595398-a96c206e012d?q=80&w=800&auto=format"
+                src="https://images/masjid_interior.png"
                 alt="Mosque interior"
                 className="w-full h-full object-cover opacity-50"
               />
@@ -153,7 +153,7 @@ export const Services: React.FC = () => {
           >
             <div className={`${activeTab === "mission" ? "md:w-1/3" : "h-48"} bg-emerald-600 relative overflow-hidden`}>
               <img
-                src="https://images.unsplash.com/photo-1604076913837-52ab5629fba9?q=80&w=800&auto=format"
+                src="https://images/Masjid.png"
                 alt="Mosque exterior"
                 className="w-full h-full object-cover opacity-50"
               />
@@ -223,7 +223,7 @@ export const Services: React.FC = () => {
           >
             <div className={`${activeTab === "vision" ? "md:w-1/3" : "h-48"} bg-emerald-600 relative overflow-hidden`}>
               <img
-                src="https://images.unsplash.com/photo-1588764815242-a465083d4fee?q=80&w=800&auto=format"
+                src="https://images/Masjid.png"
                 alt="Mosque dome"
                 className="w-full h-full object-cover opacity-50"
               />
