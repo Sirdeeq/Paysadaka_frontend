@@ -100,7 +100,7 @@ export const Home: React.FC = () => {
                 
                 <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border-8 border-white relative z-10">
                   <img 
-                    src="/images/mosque1.png" 
+                    src="/images/Masjid.png" 
                     alt="Beautiful Mosque" 
                     className="w-full h-64 md:h-80 object-cover"
                     onError={(e) => {
