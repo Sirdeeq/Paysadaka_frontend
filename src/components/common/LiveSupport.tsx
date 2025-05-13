@@ -13,14 +13,14 @@ export const LiveSupport: React.FC = () => {
       >
         <div className="p-4 space-y-3">
           <a
-            href="mailto:support@paysadaka.com"
+            href="mailto:paysadaqa@gmail.com"
             className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-emerald-50 rounded-md"
           >
             <Mail className="w-5 h-5" />
             <span>Email Support</span>
           </a>
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/+2348066011841"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 px-4 py-2 text-gray-600 hover:bg-emerald-50 rounded-md"
